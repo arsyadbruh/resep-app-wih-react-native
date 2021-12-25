@@ -41,7 +41,7 @@ const ArticleDetailScreen = ({route}) => {
                     <Spinner size={"lg"} color={"#fe7100"}/>
                 </Center>
             ) : (
-                <Box p={5}>
+                <ScrollView p={5}>
                     <Box>
                         <AspectRatio w="100%" ratio={16 / 9 }>
                             <Image source={{ uri: articleDetail.thumb }} alt="Article Thumbnail" />
@@ -53,7 +53,7 @@ const ArticleDetailScreen = ({route}) => {
                             </HStack>
                         </Box>
                     </Box>
-                    <Box>
+                    <Box mb={10}>
                         <Heading my={3}>{articleDetail.title}</Heading>
                         <HStack alignItems={"center"}>
                             <Ionicons name="person-circle" size={30} color="#606582" />
@@ -62,8 +62,14 @@ const ArticleDetailScreen = ({route}) => {
                                 <Text fontSize={18}>  {articleDetail.date_published}</Text>
                             </Text>
                         </HStack>
+                        <Box mt={15} borderTopWidth={1} pt={3} borderColor={"gray.400"} mb={5}>
+                            {articleDetail.description.split(". ").map((paragraph, index) => (
+                                <Text key={index} fontSize={"lg"} mb={2} textAlign={"justify"}>{paragraph}.</Text>
+                            ))}
+                        </Box>
                     </Box>
-                </Box>
+                
+                </ScrollView>
             )}
         </>
     );
