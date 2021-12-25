@@ -7,6 +7,7 @@ import { NativeBaseProvider, StatusBar } from "native-base";
 import {
   AboutScreen,
   ArticleScreen,
+  ArticleDetailScreen,
   RecipeDetailScreen,
   RecipeScreen,
 } from "./screens";
@@ -93,6 +94,11 @@ const App = () => {
           <Stack.Screen
             name="RecipeDetail"
             component={RecipeDetailScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ArticleDetail"
+            component={ArticleDetailScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

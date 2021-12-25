@@ -6,7 +6,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { FontAwesome } from '@expo/vector-icons';
 
 
-const ArticleScreen = () => {
+const ArticleScreen = ({ navigation }) => {
   const [isArticleLoading, setArticleLoading] = useState(true);
   const [isCategoryLoading, setCategoryLoading] = useState(true);
   const [isFetching, setFetching] = useState(false);
@@ -35,7 +35,12 @@ const ArticleScreen = () => {
       const json = await response.json();
       setCategory(json.results);
       setActiveCategory(json.results[0].key);
-      fetchArticle(activeCategory);
+      // calling updater
+      // karena setState yang tidak langsung update
+      setActiveCategory((state) => {
+        fetchArticle(state);
+        return state;
+      })
     } catch (error) {
       console.error(error);
     } finally {
@@ -45,8 +50,10 @@ const ArticleScreen = () => {
   };
 
   const articleItem = ({ item }) => {
+    const tagCategory = activeCategory;
+    
     return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={ () => navigation.navigate("ArticleDetail", {key: item.key, tag: tagCategory, label: item.tags})}>
         <Box px={5} mb={30} rounded={"md"}>
           <Box borderWidth={1} borderColor={"gray.300"} overflow={"hidden"} rounded={"lg"}>
             <Box>
