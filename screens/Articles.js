@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import { Center, HStack, ScrollView, Text, Box, Image, AspectRatio, Heading, Spinner, FlatList, View } from "native-base";
 import { Header } from "../components";
 import { TouchableOpacity } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { FontAwesome } from '@expo/vector-icons';
 
 
