@@ -9,6 +9,7 @@ import {
 } from "native-base";
 import React from "react";
 import { useNavigation } from "@react-navigation/core";
+import {TouchableOpacity} from "react-native";
 
 const Header = ({ title, withLogo, withBackBtn }) => {
   const navigation = useNavigation();
@@ -34,7 +35,10 @@ const Header = ({ title, withLogo, withBackBtn }) => {
             {title}
           </Text>
         </HStack>
-        <SearchIcon color="white" size="sm" />
+        <TouchableOpacity onPress={ () => alert("Search")}>
+            <SearchIcon color="white" size="sm" />
+          {/* <Text>Halo</Text> */}
+        </TouchableOpacity>
       </HStack>
     </Box>
   );
