@@ -36,6 +36,8 @@ const ArticleDetailScreen = ({route}) => {
             <Header title="Article" withBackBtn={true} />
             {/* {console.log(articleDetail)} */}
             {console.log("in return isLoading : "+isLoading)}
+            {console.log(articleDetail.thumb)}
+
             {isLoading ? (
                 <Center flex={1}>
                     <Spinner size={"lg"} color={"#fe7100"}/>
