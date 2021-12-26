@@ -9,7 +9,9 @@ const RecipeDetailScreen = ({route}) => {
   const getResepDetail = async () => {
     console.log(route.params.resepKey);
     try {
-      const response = await fetch("https://masak-apa-tomorisakura.vercel.app/api/recipe/semur-daging-betawi");
+      const response = await fetch(
+        `https://masak-apa-tomorisakura.vercel.app/api/recipe/${route.params.resepKey}`
+      );
       const json = await response.json();
       setData(json.results);
     } catch (error) {
