@@ -108,7 +108,7 @@ const ArticleScreen = ({ navigation }) => {
       
       {
         !isCategoryLoading && (
-          <Box mt={3}>
+          <Box my={3}>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
               <HStack>
                 {category.map( (categoryItem, index) => (
