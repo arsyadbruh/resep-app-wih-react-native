@@ -1,9 +1,17 @@
-import React, {useEffect, useState} from "react";
-import { Center, HStack, ScrollView, Text, Box, Image, AspectRatio, Heading, Spinner, FlatList, View } from "native-base";
+import React, { useEffect, useState } from "react";
+import {
+  Center,
+  HStack,
+  Text,
+  Box,
+  Image,
+  AspectRatio,
+  Heading,
+  Spinner,
+  FlatList,
+} from "native-base";
 import { TouchableOpacity } from "react-native";
 import { Header } from "../components";
-
-
 
 const RecipeScreen = ({ navigation }) => {
   const [data, setData] = useState([]);
@@ -12,34 +20,30 @@ const RecipeScreen = ({ navigation }) => {
 
   const getResepData = async () => {
     try {
-      const response = await fetch(
-        "https://masak-apa-tomorisakura.vercel.app/api/recipes"
-      );
+      const response = await fetch("https://masak-apa-tomorisakura.vercel.app/api/recipes");
       const json = await response.json();
       setData(json.results);
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
-      setFetching(false)
+      setFetching(false); // set false untuk menandakan refresh telah berhenti
     }
   };
 
   const refreshRecipe = () => {
     setFetching(true);
     getResepData();
-  }
-
+  };
 
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity
-        onPress={() => navigation.navigate("RecipeDetail", { resepKey: item.key })}
-      >
+      <TouchableOpacity onPress={() => navigation.navigate("RecipeDetail", { resepKey: item.key })}>
         <Box p={5}>
           <Box bg={"white"} borderWidth={1} borderColor={"gray.300"}>
+            {/* Image Section */}
             <Box>
-              <AspectRatio w="100%" ratio={16 / 9 }>
+              <AspectRatio w="100%" ratio={16 / 9}>
                 <Image source={{ uri: item.thumb }} alt="thumbnail resep" />
               </AspectRatio>
               <Box position={"absolute"} bottom={0} left={0} p={2} bg={"#fe7100"}>
@@ -47,6 +51,7 @@ const RecipeScreen = ({ navigation }) => {
               </Box>
             </Box>
 
+            {/* Text Section */}
             <Box p={3}>
               <Heading>{item.title}</Heading>
               <HStack alignItems={"center"}>
@@ -55,7 +60,7 @@ const RecipeScreen = ({ navigation }) => {
               </HStack>
             </Box>
 
-          </Box>
+          </Box> {/* End tag card */}
         </Box>
       </TouchableOpacity>
     );
@@ -65,14 +70,13 @@ const RecipeScreen = ({ navigation }) => {
     getResepData();
   }, []);
 
-
   return (
     <>
       <Header title="Recipes" withLogo={true} />
 
       {isLoading ? (
         <Center flex={1}>
-          <Spinner size={"lg"} color={"#fe7100"}/>
+          <Spinner size={"lg"} color={"#fe7100"} />
         </Center>
       ) : (
         <FlatList
@@ -83,7 +87,6 @@ const RecipeScreen = ({ navigation }) => {
           refreshing={isFetching}
         />
       )}
-
     </>
   );
 };
