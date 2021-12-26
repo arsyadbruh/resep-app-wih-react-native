@@ -110,7 +110,7 @@ const ArticleScreen = ({ navigation }) => {
 
     // menyesuaikan dengan handleCategory
     // karena setState tidak langsung melakukan update value
-    key == null ? fetchArticle(activeCategory) : fetchArticle(key);
+    key === null ? fetchArticle(activeCategory) : fetchArticle(key);
   };
 
   useEffect(() => {
